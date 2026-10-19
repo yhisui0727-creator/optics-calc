@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>プリズムの最小偏角 計算機</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho+B1:wght@600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow"><a href="../index.html">Optics Calculator</a></div>
+  <h1>プリズムの最小偏角</h1>
+</header>
+
+<section class="calc">
+  <p class="sub">プリズムを通った光は、入った向きから曲がって出てきます。この曲がった角度を「偏角」といいます。入射角を変えると偏角は変わり、ある入射角で一番小さくなります。これが「最小偏角」です。頂角（光が通る2つの面のなす角）と屈折率から求めます。プリズムのまわりは空気（屈折率1）とします。角度の単位は「°」です。</p>
+  <div class="inputs">
+    <label>頂角 A <span class="u">[°]</span><input id="p_A" type="number" step="1" min="0" value="60"></label>
+    <label>屈折率 n <input id="p_n" type="number" step="0.01" min="0" value="1.5"></label>
+    <label>入射角 θ₁ <span class="u">[°]</span><input id="p_th" type="number" step="1" value="50"></label>
+  </div>
+  <div class="results" id="p_out"></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>偏角 δ</span><span><i style="background:var(--accent2)"></i>最小偏角の点</span><span>点線：入力した入射角</span></div>
+  <div class="chart" id="p_chart"></div>
+  <details open><summary>使っている式</summary>
+<div class="formula">最小偏角   n = sin((A + δmin)/2) / sin(A/2)
+         →  δmin = 2 · arcsin(n · sin(A/2)) − A
+最小偏角のときの入射角   θ₁ = (A + δmin)/2（光はプリズムの中を左右対称に進む）
+任意の入射角での偏角（スネルの法則を2回使う）
+  入口   sin θ₁ = n · sin θ₁'
+  出口   θ₂' = A − θ₁'、 sin θ₂ = n · sin θ₂'
+  偏角   δ = θ₁ + θ₂ − A
+n · sin θ₂' > 1 のときは出口で全反射して、光は出てこない
+頂角が小さいときの近似   δ ≈ (n − 1) · A</div></details>
+</section>
+
+<section class="calc">
+  <h2>検証値</h2>
+  <p class="sub">sin30° = 1/2、sin45° = 1/√2、sin60° = √3/2 などの公知の値と、電卓で計算した値、薄いプリズムの近似式 δ ≈ (n−1)A と照合しています。</p>
+  <div class="tbl"><table id="tests"><thead><tr><th>条件</th><th>期待値</th><th>計算値</th><th>判定</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<footer>計算結果は参考値です。設計などに使う前に必ず確認してください。</footer>
+</div>
+<script type="module" src="../js/pages/prism.js"></script>
+</body>
+</html>
