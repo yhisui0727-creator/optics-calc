@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マルスの法則 計算機</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho+B1:wght@600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow"><a href="../index.html">Optics Calculator</a></div>
+  <h1>マルスの法則（偏光板を通る光の強さ）</h1>
+</header>
+
+<section class="calc">
+  <p class="sub">直線偏光（振動の向きがそろった光）が偏光板を通ると、強さは角度 θ に応じて弱まります。θ は「光の偏光の向き」と「偏光板の透過軸（光を通す向き）」のなす角です。角度の単位は「°」です。強度の単位は自由で、出力も入力と同じ単位になります。</p>
+  <div class="inputs">
+    <label>入射光の強度 I₀ <input id="m_I0" type="number" step="1" min="0" value="100"></label>
+    <label>角度 θ <span class="u">[°]</span><input id="m_th" type="number" step="1" value="30"></label>
+  </div>
+  <div class="results" id="m_out"></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>透過率 I/I₀</span><span>点線：現在の角度</span></div>
+  <div class="chart" id="m_chart"></div>
+  <details open><summary>使っている式</summary>
+<div class="formula">マルスの法則   I = I₀ · cos²θ
+透過率         I / I₀ = cos²θ
+θ = 0° で全部通り、θ = 90°（直交ニコル）で 0 になる
+無偏光の光を1枚目に通すと、強さは I₀ / 2 になる</div></details>
+</section>
+
+<section class="calc">
+  <h2>検証値</h2>
+  <p class="sub">cos の公知の値（cos30° = √3/2、cos45° = 1/√2、cos60° = 1/2 など）から手計算した値と照合しています。</p>
+  <div class="tbl"><table id="tests"><thead><tr><th>条件</th><th>期待値</th><th>計算値</th><th>判定</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<footer>計算結果は参考値です。設計などに使う前に必ず確認してください。</footer>
+</div>
+<script type="module" src="../js/pages/malus.js"></script>
+</body>
+</html>
