@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>薄レンズの結像 計算機</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho+B1:wght@600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow"><a href="../index.html">Optics Calculator</a></div>
+  <h1>薄レンズの公式・結像</h1>
+</header>
+
+<section class="calc">
+  <p class="sub">レンズの焦点距離 f と、物体からレンズまでの距離 a から、像ができる位置 b と倍率 m を求めます。レンズの厚みは無視します（薄レンズ）。凸レンズは f を正、凹レンズは f を負で入れてください。長さの単位は「mm」です。</p>
+  <div class="inputs">
+    <label>焦点距離 f <span class="u">[mm]</span><input id="t_f" type="number" step="1" value="100"></label>
+    <label>物体の距離 a <span class="u">[mm]</span><input id="t_a" type="number" step="1" min="0" value="300"></label>
+  </div>
+  <div class="results" id="t_out"></div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>像の位置 b</span><span>点線：入力した a</span></div>
+  <div class="chart" id="t_chart"></div>
+  <details open><summary>使っている式</summary>
+<div class="formula">薄レンズの公式   1/a + 1/b = 1/f
+         →  b = a · f / (a − f)
+横倍率   m = −b / a
+b &gt; 0：レンズの後ろにできる実像（スクリーンに映る）
+b &lt; 0：レンズの前にできる虚像（レンズをのぞくと見える）
+m &lt; 0：倒立（上下逆）、 m &gt; 0：正立。|m| が大きさの倍率
+a = f（物体が焦点の上）のときは、光が平行に出て像はできない</div></details>
+</section>
+
+<section class="calc">
+  <h2>検証値</h2>
+  <p class="sub">教科書の定番の例（2f の位置に置くと等倍の倒立実像、焦点の内側に置くと虫めがねの正立虚像、凹レンズは縮小した正立虚像）を、公式から手計算した値と照合しています。</p>
+  <div class="tbl"><table id="tests"><thead><tr><th>条件</th><th>期待値</th><th>計算値</th><th>判定</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<footer>計算結果は参考値です。設計などに使う前に必ず確認してください。</footer>
+</div>
+<script type="module" src="../js/pages/thinlens.js"></script>
+</body>
+</html>
